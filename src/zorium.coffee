@@ -22,7 +22,7 @@ unless Function::bind
     fBound:: = new fNOP()
     fBound
 # coffeelint: enable=missing_fat_arrows
-
+Rx = require 'rx/dist/rx'
 _ = require 'lodash'
 
 z = require './z'

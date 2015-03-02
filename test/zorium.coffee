@@ -2,7 +2,7 @@ should = require('clay-chai').should()
 createElement = require 'virtual-dom/create-element'
 Promise = window.Promise or require 'promiz'
 
-z = require 'zorium'
+z = require '../src/zorium'
 
 # TODO: batch redraws
 
@@ -23,6 +23,132 @@ deferred = ->
   return promise
 
 describe 'Virtual DOM', ->
+  # it.only 'highland', (done) ->
+  #   Rx = require 'rx'
+  #
+  #   class User
+  #     constructor: ->
+  #       @meMeta = new Rx.ReplaySubject(1)
+  #       @me = @meMeta.mergeAll()
+  #       @isMeInitialized = false
+  #
+  #     getMe: =>
+  #       unless @isMeInitialized
+  #         @meMeta.onNext @loginAnon()
+  #         @isMeInitialized = true
+  #       return @me
+  #
+  #     setMe: (_me) =>
+  #       @meMeta.onNext _me
+  #       @isMeInitialized = true
+  #       return @me
+  #
+  #     loginAnon: ->
+  #       Rx.Observable.fromPromise Promise.resolve {id: 'user'}
+  #
+  #   class Developer
+  #     getByUserId: (userId) ->
+  #       Rx.Observable.fromPromise Promise.resolve {id: 'dev', userId}
+  #
+  #   class Game
+  #     getByDeveloperId: (devId) ->
+  #       Rx.Observable.fromPromise Promise.resolve {id: 'game', devId}
+  #
+  #   class Component
+  #     constructor: ->
+  #       @state = {
+  #         games: User.getMe().flatMap (user) ->
+  #           Developer.getByUserId user.id
+  #           .flatMap (developer) ->
+  #             Game.getByDeveloperId developer.id
+  #         pending: pending
+  #         static: 'a'
+  #       }
+  #
+  #   pending = new Rx.ReplaySubject(1)
+  #   User = new User()
+  #   Developer = new Developer()
+  #   Game = new Game()
+  #   component = new Component()
+  #
+  #   # it's ok to store observables as `this` props outside of state
+  #   # dont prefix with o_x - as it is implied by the `@`
+  #   createState = (initialState) ->
+  #     currentValue = {}
+  #
+  #     state = new Rx.ReplaySubject(1)
+  #
+  #     # set currentState to all values of initialState
+  #     _.forEach initialState, (val, key) ->
+  #       if val.subscribe
+  #         currentValue[key] = null
+  #         val.subscribe (update) ->
+  #           currentValue[key] = update
+  #           state.onNext currentValue
+  #       else
+  #         currentValue[key] = val
+  #
+  #     state.onNext currentValue
+  #
+  #     state.value = ->
+  #       currentValue
+  #
+  #     state.set = (diff) ->
+  #       _.forEach diff, (val, key) ->
+  #         if initialState[key].onNext
+  #           initialState[key].onNext val
+  #         else
+  #           currentValue[key] = val
+  #
+  #       state.onNext currentValue
+  #       return state
+  #
+  #     return state
+  #
+  #   state = createState component.state
+  #   # state = Rx.Observable.merge(_.values(component.state)...)
+  #   console.log 'val', state.value()
+  #   state.subscribe (x) ->
+  #     console.log x
+  #
+  #   pending.onNext 'x'
+
+    # component.state.pending.onNext 42
+
+    # games = component.state.games
+    # games.subscribe console.log
+    # me = User.getMe()
+    # me.subscribe console.log
+    #
+    # setTimeout ->
+    #   console.log 'SETTING'
+    #   User.setMe Rx.Observable.return {id: 'user2'}
+    # , 100
+
+
+
+    # component.state.games.subscribe (x) ->
+    #   console.log x
+    #
+    #   # User.getMe()
+    #
+    #   User.setMe({id: 'user2'}).subscribe (x) ->
+    #     console.log 'waht', x
+    #     done()
+
+    # component.state.games.subscribe (x) ->
+    #   console.log x
+    #   done()
+      #
+      # User.getMe().subscribe (x) ->
+      #   console.log x
+      #
+      # User.getMe().subscribe (x) ->
+      #   console.log x
+      #   done()
+
+
+
   it 'creates basic DOM trees', ->
     dom = z 'div',
       z '.cname#cid', 'abc'

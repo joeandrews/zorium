@@ -78,7 +78,7 @@ gulp.task 'scripts:test', ->
     ]
     resolve:
       extensions: ['.coffee', '.js', '.json', '']
-      modulesDirectories: ['node_modules', './src']
+      modulesDirectories: ['node_modules']
   .pipe rename 'tests.js'
   .pipe gulp.dest paths.build
 
